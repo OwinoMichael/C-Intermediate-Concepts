@@ -3,6 +3,15 @@
 #include <stdbool.h>
 #include <limits.h>
 
+/*
+
+    Never assume. Always validate shift amounts, bit positions, and endianness.
+
+    In networking, you're parsing data from potentially malicious sources. 
+    A single invalid shift or out-of-range bit access can crash your entire system.
+
+*/
+
 // Safe for any unsigned type
 #define BITS_IN_TYPE(type) (sizeof(type) * CHAR_BIT)
 
@@ -50,7 +59,7 @@ void write_network_uint16(uint8_t *data, uint16_t value) {
 
 // Test all edge cases
 int main() {
-    printf("=== Edge Case Testing ===\n\n";
+    printf("=== Edge Case Testing ===\n\n");
     
     // 1. Shift by width
     uint32_t test = 1;
